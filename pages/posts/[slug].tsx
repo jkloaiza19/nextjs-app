@@ -53,12 +53,13 @@ export const getStaticPaths = async () => {
 
     const posts = await apiHelper().posts.retrieveAll()
     const paths = posts.map((post) => ({ params: { slug: post.slug } }))
-
+    console.log('paths', paths)
     return {
       paths: [...paths],
       fallback: false
     }
   } catch (error) {
+    console.log('esta mierda falló')
     return {
       notFound: true,
     }

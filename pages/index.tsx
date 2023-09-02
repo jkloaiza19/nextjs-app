@@ -30,10 +30,6 @@ interface Props {
 }
 
 export default function Home({ posts }: Props) {
-  // const featureEvents = getFeaturedEvents()
-  // const { products } = props 
-  console.log('posts', posts)
-
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between ${inter.className}`}
