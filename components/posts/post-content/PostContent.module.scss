@@ -1,0 +1,30 @@
+.header {
+  @apply flex;
+  @apply flex-col;
+  @apply md:flex-row;
+  @apply items-center;
+  @apply pb-4;
+  @apply border-b-2;
+  @apply border-t-cyan-50;
+
+  div {
+    @apply flex;
+    @apply flex-col;
+    @apply ps-4;
+    @apply gap-2;
+  }
+
+  h1 {
+    @apply text-6xl;
+    @apply pt-4;
+    @apply md:pt-0;
+  }
+}
+
+.markdownContainer {
+  @apply py-4;
+
+ & > h1 {
+  @apply text-4xl;
+  }
+}
