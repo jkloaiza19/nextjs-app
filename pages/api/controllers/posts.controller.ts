@@ -1,15 +1,15 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 // api
-import client from '../utils/database'
+// import client from '../utils/database'
 import { DBCollections } from '../utils/schema'
 import { DBConnection } from '../utils/schema'
 
 // schema
 import { IPost } from '../utils/schema'
 
-export const handleGetAllPosts = async (_req: NextApiRequest, res: NextApiResponse): Promise<IPost[]> => {
-  let dbClient = new DBConnection<IPost>(DBCollections.posts, client)
+export const handleGetAllPosts = async (_req: NextApiRequest, res: NextApiResponse) => {
+  let dbClient = new DBConnection<IPost>(DBCollections.posts)
 
   try {
     await dbClient.connect()

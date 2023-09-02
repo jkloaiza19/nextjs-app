@@ -12,6 +12,7 @@ import { formatDate } from "@/utils/system.util"
 
 // styles
 import styles from './PostContent.module.scss'
+import React, { HTMLProps } from "react"
 
 interface Props {
   post: IPost
@@ -21,7 +22,7 @@ const PostContent: React.FC<Props> = (
   { post: { title, content, slug, author, image, createdAt } }: Props): React.ReactElement => {
 
   const customRenderers = {
-    code({node, inline, className, children, ...props}: Record<string, string>) {
+    code({node, inline, className, children, ...props}: Record<string, any>) {
         const match = /language-(\w+)/.exec(className || '')
         return !inline && match ? (
           <SyntaxHighlighter

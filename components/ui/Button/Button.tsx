@@ -5,7 +5,7 @@ import styles from './Button.module.css'
 
 interface ButtonProps {
   children: React.ReactNode,
-  link: string,
+  link?: string,
   onClick?: () => void | null,
 }
 

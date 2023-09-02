@@ -3,7 +3,7 @@ import type { IEventList } from '../schema/events.schema'
 import type { GenericObject } from '../schema/page.schema'
 
 // api
-import client from '@/pages/api/utils/database'
+// import client from '@/pages/api/utils/database'
 import { DBCollections } from '@/pages/api/utils/schema'
 import { DBConnection } from '@/pages/api/utils/schema'
 import { IPost } from '@/pages/api/utils/schema'
@@ -55,5 +55,5 @@ export const getFilteredEvents = async (datefilter: GenericObject): Promise<IEve
 }
 
 export const apiHelper = () => ({
-  posts: new DBConnection<IPost>(DBCollections.posts, client)
+  posts: new DBConnection<IPost>(DBCollections.posts)
 })

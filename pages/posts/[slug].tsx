@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: Context) =>{
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths = async () => {
   try {
     await apiHelper().posts.connect()
 
@@ -55,7 +55,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = posts.map((post) => ({ params: { slug: post.slug } }))
 
     return {
-      paths,
+      paths: [...paths],
       fallback: false
     }
   } catch (error) {

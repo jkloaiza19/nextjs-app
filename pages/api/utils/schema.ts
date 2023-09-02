@@ -1,5 +1,5 @@
-import { MongoClient } from 'mongodb'
-// import client from './database'
+// import { MongoClient } from 'mongodb'
+import client from './database'
 
 export enum RequestMethod {
   POST = 'POST',
@@ -62,7 +62,7 @@ export interface IPost {
   isFeatured: boolean
 }
 
-export type MongoClientType = typeof MongoClient
+export type MongoClientType = Record<string, any>
 
 export type Sort = Record<string, string | number>
 
@@ -81,15 +81,15 @@ export class DBConnection<T> implements IDBConnection<T> {
   private dbClient: MongoClientType
   private collection: DBCollections
   private defaultSort: Sort = { _id: -1 } // sorts items descending by _id
-  private defaultProjection = { _id: 0 } // excludes the _id prop
+  private defaultProjection: Projection = { _id: 0 } // excludes the _id prop
 
-  public constructor (collection: DBCollections, client: MongoClientType) {
+  public constructor (collection: DBCollections) { //, client: MongoClientType
     this.collection = collection
     this.dbClient = client
   }
 
   public async connect() {
-    this.dbClient.connect()
+    this.dbClient.connect('')
   }
 
   public async close() {
@@ -97,11 +97,11 @@ export class DBConnection<T> implements IDBConnection<T> {
   }
 
   public async insertOne(data: T): Promise<T> {
-    return this.dbClient.db().collection<T>(this.collection).insertOne(data)
+    return this.dbClient.db().collection(this.collection).insertOne(data)
   }
 
   public async findOne(query: any, sort?: Sort, projection?: Projection): Promise<T> {
-    return this.dbClient.db().collection<T>(this.collection)
+    return this.dbClient.db().collection(this.collection)
       .findOne(query, {
         sort: sort || this.defaultSort,
         projection: projection || this.defaultProjection,
@@ -109,7 +109,7 @@ export class DBConnection<T> implements IDBConnection<T> {
   }
 
   public async retrieveAll(sort?: Sort): Promise<T[]> {
-    return this.dbClient.db().collection<T>(this.collection)
+    return this.dbClient.db().collection(this.collection)
       .find() // returns all the items for a given collection
       .sort(sort || this.defaultSort)
       .project({ _id: 0 })
@@ -117,7 +117,7 @@ export class DBConnection<T> implements IDBConnection<T> {
   }
 
    public async retrieveAllWithQuery(query: any, sort?: Sort, projection?: Projection): Promise<T[]> {
-    return this.dbClient.db().collection<T>(this.collection)
+    return this.dbClient.db().collection(this.collection)
       .find(query, {
         sort: sort || this.defaultSort,
         projection: projection || this.defaultProjection,

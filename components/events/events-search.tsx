@@ -3,7 +3,7 @@ import React, { FormEvent, FormEventHandler, useRef } from 'react'
 import Button from '../ui/Button/Button'
 import styles from './events-search.module.css'
 
-function EventsSearch(props) {
+function EventsSearch(props: Record<string, any>) {
   const yearInputRef = useRef<HTMLSelectElement | any>()
   const monthInputRef = useRef<HTMLSelectElement | any>()
 
